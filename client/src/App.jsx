@@ -6,6 +6,7 @@ import About from "./components/About";
 import Editor from "./components/Editor";
 import Navbar from "./components/Navbar";
 import LoginPage from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/write" element={<Editor />} />
+        <Route path="/write" element={<PrivateRoute><Editor /></PrivateRoute>} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>

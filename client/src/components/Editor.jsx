@@ -22,10 +22,11 @@ const Editor = () => {
 
   const rephraseSentence = async () => {
     try {
+      const sentence=selectedSentence;
       const response = await axios.post(
-        "http://localhost:5000/api/analyze",
+        "http://localhost:3000/api/analyze",
         {
-          sentence: selectedSentence,
+          sentence
         },
         {
           headers: {
@@ -33,7 +34,8 @@ const Editor = () => {
           },
         }
       );
-      setRephrasedSentences(response.data.rephrasedSentences);
+      setRephrasedSentences(response.data);
+      console.log("rephrased.... ", response.data);
     } catch (error) {
       console.error("Error rephrasing sentence:", error);
     }
@@ -46,7 +48,7 @@ const Editor = () => {
   const checkSpelling = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/spellcheck",
+        "http://localhost:3000/api/spellCheck",
         { text },
         {
           headers: {
@@ -54,7 +56,9 @@ const Editor = () => {
           },
         }
       );
-      setSpellCheckedText(response.data.correctedText);
+      
+      setSpellCheckedText(response.data);
+      console.log('spelling.... ',response.data)
     } catch (error) {
       console.error("Error checking spelling:", error);
     }
@@ -63,10 +67,11 @@ const Editor = () => {
   const checkGrammar = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/grammarcheck",
+        "http://localhost:3000/api/grammarCheck",
         { text }
       );
-      setGrammarCheckedText(response.data.correctedText);
+      setGrammarCheckedText(response.data);
+      console.log('grammar.... ',response.data);
     } catch (error) {
       console.error("Error checking grammar:", error);
     }
